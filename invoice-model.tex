@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{report}
 
 \usepackage{invoice}
 \usepackage{/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr}
@@ -7,15 +7,35 @@
 
 \author{Name Surname}
 
+\def \clientHeading {Billed to}
+\def \clientName {My Favorite Company}
+\def \clientAddress {22 Acacia Ave}
+\def \clientCity {Somewhere}
+\def \clientVat {VAT: 1234567890}
+
 \makeatletter
 
 \lhead{}
-\chead{\@author}
+\chead{\textsc \@author }
 \rhead{}
 
 \begin{document}
 
-Body of the invoice
+\begin{minipage}[t]{\textwidth}
+  \begin{verse}
+    \begin{flushright}
+      \begin{tabular}{rl}
+        \clientHeading & \clientName
+        \\[3pt]
+        & \clientAddress
+        \\[3pt]
+        & \clientCity
+        \\[3pt]
+        & \clientVat
+      \end{tabular}
+    \end{flushright}
+  \end{verse}
+\end{minipage}
 
 \end{document}
 
