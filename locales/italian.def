@@ -1,0 +1,17 @@
+\def \ClientHeading                      {Spettabile}
+\def \InvoiceNumberText                  {Fattura n$^{\circ}$}
+
+\def \HeadActivity                       {Attivit\`a}
+\def \HeadAmount                         {Ammontare}
+\def \FootTotal                          {Totale}
+
+\def \OptionalTaxRate                    {4}
+\def \OptionalTaxDescription             {Contributo INPS}
+
+\def \FootNote                           {Operazione effettuata ai sensi dell'articolo
+	27 commi 1 e 2 D.L. 98/2011. Prestazione non soggetta a ritenuta
+	d'acconto ai sensi del comma 5.2 del Provvedimento Agenzia delle
+	entrate n. 185820/2011.}
+\def \FootNoteTreshold                   {Imposta di bollo assolta sull'originale.}
+\def \Treshold                           {77.47} % Euro
+

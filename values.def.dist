@@ -1,0 +1,13 @@
+\def \ClientName                         {My Favorite Company}
+\def \ClientAddress                      {22 Acacia Ave}
+\def \ClientCity                         {Somewhere in the World}
+\def \ClientVat                          {1234567890}
+
+\def \InvoiceNumberValue                 {1}
+\def \InvoiceDate                        {October 09, 2014}
+
+\def \ActivityDescription                {Got a cat down from a very very high tree}
+\def \ActivityFee                        {10000.00}
+
+%To make the optional tax disappear from the invoice, put this value to 0
+%\def \OptionalTaxRate                   {0}

@@ -10,56 +10,46 @@
 \usepackage{ifthen}
 \usepackage{ragged2e}
 
+\input{./locales/italian.def}
+\input{./values.def}
+
 \pagestyle{fancy}
 
 \author{Name Surname}
 
-% Settings
-\def \Currency                   {Euro}
-
 % Default english expressions
-\providecommand{\ClientHeading}  {Billed to}
-\providecommand{\InvoiceNumber}  {Invoice n$^{\circ}$ 1}
-\providecommand{\VatName}        {VAT}
+\providecommand{\ClientHeading}          {Billed to}
+\providecommand{\InvoiceNumberText}      {Invoice no.}
+\providecommand{\VatName}                {VAT}
 
-\providecommand{\HeadActivity}   {Activity}
-\providecommand{\HeadAmount}     {Amount}
-\providecommand{\FootTotal}      {Total}
-
-\providecommand{\Period}         {Period}
-
-% TODO migrate outside and activate under condition
-% Italian expressions
-%\def \OptionalTaxRate            {4}
-%\def \OptionalTaxDescription     {Contributo INPS (\OptionalTaxRate\%)}
-\def \FootNote                    {Operazione effettuata ai sensi dell'articolo
-	27 commi 1 e 2 D.L. 98/2011. Prestazione non soggetta a ritenuta
-	d'acconto ai sensi del comma 5.2 del Provvedimento Agenzia delle
-	entrate n. 185820/2011.}
-\def \FootNoteTreshold               {Imposta di bollo assolta sull'originale.}
-\def \Treshold                       {77.47} % Euro
+\providecommand{\HeadActivity}           {Activity}
+\providecommand{\HeadAmount}             {Amount}
+\providecommand{\FootTotal}              {Total}
 
 \vspace{10 mm}
 
 % Default values
-\providecommand{\ClientName}             {My Favorite Company}
-\providecommand{\ClientAddress}          {22 Acacia Ave}
-\providecommand{\ClientCity}             {Somewhere}
-\providecommand{\ClientVat}              {1234567890}
+\providecommand{\ClientName}             {COMPANY NAME}
+\providecommand{\ClientAddress}          {ADDRESS}
+\providecommand{\ClientCity}             {CITY, STATE}
+\providecommand{\ClientVat}              {VAT\_CODE}
 
+\providecommand{\InvoiceNumberValue}     {0}
 \providecommand{\InvoiceDate}            {\today}
 
 \providecommand{\ActivityDescription}    {\blindtext}
-\providecommand{\ActivityFee}            {10000.00}
+\providecommand{\ActivityFee}            {0.00}
 
-\providecommand{\OptionalTaxRate}        {0}
-\providecommand{\OptionalTaxDescription} {Optional Tax (\OptionalTaxRate\%)}
+\providecommand{\OptionalTaxDescription} {OPTIONAL TAX}
+\providecommand{\OptionalTaxRate}        {10}
 
 \providecommand{\FootNote}               {}
 \providecommand{\FootNoteTreshold}       {}
 
 % Calculated values
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
+\def \InvoiceNumberOut                   {\InvoiceNumberText\ \InvoiceNumberValue}
+\def \OptionalTaxDescOut                 {\OptionalTaxDescription\ (\OptionalTaxRate\%)}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
 \FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
 
@@ -112,7 +102,7 @@
 \begin{minipage}[t]{\textwidth}
   \begin{flushleft}
     \begin{tabular}{r}
-      \InvoiceNumber
+      \InvoiceNumberOut
       \\
       \InvoiceDate
     \end{tabular}
@@ -135,7 +125,7 @@
   \ifthenelse{\equal{\OptionalTaxRate}{0}}{\\}{
     \\
     {\setlength{\baselineskip}{0.7\baselineskip}
-      \OptionalTaxDescription \par
+      \OptionalTaxDescOut \par
     }
     & \OptionalTaxAmount \texteuro
     \\
