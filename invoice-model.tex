@@ -2,44 +2,59 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
-\usepackage{invoice}
 \usepackage{/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr}
 \usepackage{lmodern,textcomp}
 \usepackage{eurosym}
-%\usepackage{setspace}
+\usepackage{blindtext}
+\usepackage[nomessages]{fp}
 
 \pagestyle{fancy}
 
 \author{Name Surname}
 
-\def \clientHeading          {Billed to}
-\def \clientName             {My Favorite Company}
-\def \clientAddress          {22 Acacia Ave}
-\def \clientCity             {Somewhere}
-\def \clientVat              {VAT: 1234567890}
+% Settings
+\def \Currency                   {Euro}
 
-\def \invoiceNumber          {Invoice n$^{\circ}$ 1}
-\def \invoiceDate            {\today}
+% Default english expressions
+\providecommand{\ClientHeading}  {Billed to}
+\providecommand{\InvoiceNumber}  {Invoice n$^{\circ}$ 1}
+\providecommand{\VatName}        {VAT}
 
-\def \projectName            {Project Name}
-\def \currency               {Euro}
-\def \OptionalTaxRate        {4}
-%\def \OptionalTaxDescription {Contributo INPS (\OptionalTaxRate\%)}
-\def \OptionalTaxDescription {Optional Tax (\OptionalTaxRate\%)}
-\def \OptionalTaxAmount      {400.00}
+\providecommand{\HeadActivity}   {Activity}
+\providecommand{\HeadAmount}     {Amount}
+\providecommand{\FootTotal}      {Total}
 
-\def \ActivityDescription    {Activity Description Activity Description Activity Description Activity Description Activity Description Activity Description Activity Description }
-\providecommand{\ActivityPeriod}{\today - \today}
-\def \ActivityFee            {10000.00}
+\providecommand{\Period}         {Period}
 
-\def \Period                 {Period}
+% TODO migrate outside and activate under condition
+% Italian expressions
+\def \OptionalTaxRate            {4}
+\def \OptionalTaxDescription     {Contributo INPS (\OptionalTaxRate\%)}
 
-\def \CalculatedTotal        {10400.00}
+% Default values
+\providecommand{\ClientName}             {My Favorite Company}
+\providecommand{\ClientAddress}          {22 Acacia Ave}
+\providecommand{\ClientCity}             {Somewhere}
+\providecommand{\ClientVat}              {1234567890}
 
+\providecommand{\InvoiceDate}            {\today}
+
+\providecommand{\ActivityDescription}    {\blindtext}
+\providecommand{\ActivityFee}            {10000.00}
+
+\providecommand{\OptionalTaxRate}        {0}
+\providecommand{\OptionalTaxDescription} {Optional Tax (\OptionalTaxRate\%)}
+
+% Calculated values
+\def \ClientVatOut                       {\VatName:\ \ClientVat}
+\FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
+\FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
+
+% Compose the header
 \makeatletter
 
 \lhead{}
-\chead{\textsc \@author }
+\chead{\textsc \@author}
 \rhead{}
 
 \lfoot{}
@@ -48,19 +63,20 @@
 
 \linespread{1.5}
 
+% Compose the body
 \begin{document}
 
 \begin{minipage}[t]{\textwidth}
   \begin{verse}
     \begin{flushright}
       \begin{tabular}{rl}
-        \clientHeading & \textbf{\clientName}
+        \ClientHeading & \textbf{\ClientName}
         \\
-        & \clientAddress
+        & \ClientAddress
         \\
-        & \clientCity
+        & \ClientCity
         \\
-        & \clientVat
+        & \ClientVatOut
       \end{tabular}
     \end{flushright}
   \end{verse}
@@ -71,9 +87,9 @@
 \begin{minipage}[t]{\textwidth}
   \begin{flushleft}
     \begin{tabular}{r}
-      \invoiceNumber
+      \InvoiceNumber
       \\
-      \invoiceDate
+      \InvoiceDate
     \end{tabular}
   \end{flushleft}
 \end{minipage}
@@ -81,7 +97,7 @@
 \vspace{10 mm}
 
 \begin{tabular*}{\textwidth}{p{9cm} @{\extracolsep{\fill}} r}
-  \textbf{\Activity} & \textbf{\Amount} \\
+  \textbf{\HeadActivity} & \textbf{\HeadAmount} \\
   \hline
   & \\
   {\setlength{\baselineskip}{0.7\baselineskip}
@@ -93,7 +109,7 @@
   }
   & \OptionalTaxAmount\ \texteuro \\
   \hline
-  \textbf{\Total} & \textbf{\CalculatedTotal\ \texteuro}
+  \textbf{\FootTotal} & \textbf{\CalculatedTotal\ \texteuro}
 \end{tabular*}
 
 \end{document}
