@@ -8,6 +8,7 @@
 \usepackage{blindtext}
 \usepackage[nomessages]{fp}
 \usepackage{ifthen}
+\usepackage{ragged2e}
 
 \pagestyle{fancy}
 
@@ -31,6 +32,13 @@
 % Italian expressions
 %\def \OptionalTaxRate            {4}
 %\def \OptionalTaxDescription     {Contributo INPS (\OptionalTaxRate\%)}
+%\def \FootNote                    {Operazione effettuata ai sensi dell'articolo
+%	27 commi 1 e 2 D.L. 98/2011. Prestazione non soggetta a ritenuta
+%	d'acconto ai sensi del comma 5.2 del Provvedimento Agenzia delle
+%	entrate n. 185820/2011.}
+%\def \FootNoteExtra               {Imposta di bollo assolta sull'originale.}
+
+\vspace{10 mm}
 
 % Default values
 \providecommand{\ClientName}             {My Favorite Company}
@@ -46,6 +54,9 @@
 \providecommand{\OptionalTaxRate}        {0}
 \providecommand{\OptionalTaxDescription} {Optional Tax (\OptionalTaxRate\%)}
 
+\providecommand{\FootNote}               {}
+\providecommand{\FootNoteExtra}          {}
+
 % Calculated values
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
@@ -55,12 +66,20 @@
 \makeatletter
 
 \lhead{}
-\chead{\textsc \@author}
+\chead{\scshape\large \@author}
 \rhead{}
 
 \lfoot{}
 \cfoot{}
 \rfoot{}
+
+\ifthenelse{\equal{\FootNote}{}}{}{
+  \lfoot{\small\FootNote 
+    \ifthenelse{\equal{\FootNoteExtra}{}}{\\}{
+      \FootNoteExtra
+    }
+  }
+}
 
 \linespread{1.5}
 
@@ -97,6 +116,7 @@
 
 \vspace{10 mm}
 
+\noindent
 \begin{tabular*}{\textwidth}{p{9cm} @{\extracolsep{\fill}} r}
   \textbf{\HeadActivity} & \textbf{\HeadAmount} \\
   \hline
@@ -119,6 +139,9 @@
   \hline
   \textbf{\FootTotal} & \textbf{\CalculatedTotal \texteuro}
 \end{tabular*}
+
+% TODO line for the signature
+%\vspace{10 mm}
 
 \end{document}
 
