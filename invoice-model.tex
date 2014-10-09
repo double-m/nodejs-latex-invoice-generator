@@ -13,11 +13,20 @@
 \def \clientCity {Somewhere}
 \def \clientVat {VAT: 1234567890}
 
+\def \invoiceNumber {Invoice n$^{\circ}$ 1}
+\def \invoiceDate {\today}
+
 \makeatletter
 
 \lhead{}
 \chead{\textsc \@author }
 \rhead{}
+
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\linespread{1.5}
 
 \begin{document}
 
@@ -26,15 +35,25 @@
     \begin{flushright}
       \begin{tabular}{rl}
         \clientHeading & \clientName
-        \\[3pt]
+        \\
         & \clientAddress
-        \\[3pt]
+        \\
         & \clientCity
-        \\[3pt]
+        \\
         & \clientVat
       \end{tabular}
     \end{flushright}
   \end{verse}
+\end{minipage}
+
+\begin{minipage}[t]{\textwidth}
+  \begin{flushleft}
+    \begin{tabular}{r}
+      \invoiceNumber
+      \\
+      \invoiceDate
+    \end{tabular}
+  \end{flushleft}
 \end{minipage}
 
 \end{document}
