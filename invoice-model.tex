@@ -7,14 +7,24 @@
 
 \author{Name Surname}
 
-\def \clientHeading {Billed to}
-\def \clientName {My Favorite Company}
-\def \clientAddress {22 Acacia Ave}
-\def \clientCity {Somewhere}
-\def \clientVat {VAT: 1234567890}
+\def \clientHeading        {Billed to}
+\def \clientName           {My Favorite Company}
+\def \clientAddress        {22 Acacia Ave}
+\def \clientCity           {Somewhere}
+\def \clientVat            {VAT: 1234567890}
 
-\def \invoiceNumber {Invoice n$^{\circ}$ 1}
-\def \invoiceDate {\today}
+\def \invoiceNumber        {Invoice n$^{\circ}$ 1}
+\def \invoiceDate          {\today}
+
+\def \projectName          {Project Name}
+\def \currency             {Euro}
+%\def \VAT                  {Contributo INPS}
+\def \vat                  {23}
+%\def \vat                  {4}
+
+\def \activityDescription  {Activity Description}
+\def \activityFee          {10000.00}
+\def \activityCount        {1}
 
 \makeatletter
 
@@ -55,6 +65,13 @@
     \end{tabular}
   \end{flushleft}
 \end{minipage}
+
+\begin{invoice}{\currency}{\vat}
+\ProjectTitle{\projectName}
+
+  \Fee{\activityDescription}{\activityFee}{\activityCount}
+\end{invoice}
+
 
 \end{document}
 
