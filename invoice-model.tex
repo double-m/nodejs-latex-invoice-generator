@@ -7,6 +7,7 @@
 \usepackage{eurosym}
 \usepackage{blindtext}
 \usepackage[nomessages]{fp}
+\usepackage{ifthen}
 
 \pagestyle{fancy}
 
@@ -28,8 +29,8 @@
 
 % TODO migrate outside and activate under condition
 % Italian expressions
-\def \OptionalTaxRate            {4}
-\def \OptionalTaxDescription     {Contributo INPS (\OptionalTaxRate\%)}
+%\def \OptionalTaxRate            {4}
+%\def \OptionalTaxDescription     {Contributo INPS (\OptionalTaxRate\%)}
 
 % Default values
 \providecommand{\ClientName}             {My Favorite Company}
@@ -100,16 +101,23 @@
   \textbf{\HeadActivity} & \textbf{\HeadAmount} \\
   \hline
   & \\
+
   {\setlength{\baselineskip}{0.7\baselineskip}
-  \ActivityDescription \par
+    \ActivityDescription \par
   }
-  & \ActivityFee\ \texteuro \\
-  {\setlength{\baselineskip}{0.7\baselineskip}
-  \OptionalTaxDescription \par
+  & \ActivityFee \texteuro
+
+  \ifthenelse{\equal{\OptionalTaxRate}{0}}{\\}{
+    \\
+    {\setlength{\baselineskip}{0.7\baselineskip}
+      \OptionalTaxDescription \par
+    }
+    & \OptionalTaxAmount \texteuro
+    \\
   }
-  & \OptionalTaxAmount\ \texteuro \\
+
   \hline
-  \textbf{\FootTotal} & \textbf{\CalculatedTotal\ \texteuro}
+  \textbf{\FootTotal} & \textbf{\CalculatedTotal \texteuro}
 \end{tabular*}
 
 \end{document}
