@@ -32,11 +32,12 @@
 % Italian expressions
 %\def \OptionalTaxRate            {4}
 %\def \OptionalTaxDescription     {Contributo INPS (\OptionalTaxRate\%)}
-%\def \FootNote                    {Operazione effettuata ai sensi dell'articolo
-%	27 commi 1 e 2 D.L. 98/2011. Prestazione non soggetta a ritenuta
-%	d'acconto ai sensi del comma 5.2 del Provvedimento Agenzia delle
-%	entrate n. 185820/2011.}
-%\def \FootNoteExtra               {Imposta di bollo assolta sull'originale.}
+\def \FootNote                    {Operazione effettuata ai sensi dell'articolo
+	27 commi 1 e 2 D.L. 98/2011. Prestazione non soggetta a ritenuta
+	d'acconto ai sensi del comma 5.2 del Provvedimento Agenzia delle
+	entrate n. 185820/2011.}
+\def \FootNoteTreshold               {Imposta di bollo assolta sull'originale.}
+\def \Treshold                       {77.47} % Euro
 
 \vspace{10 mm}
 
@@ -55,7 +56,7 @@
 \providecommand{\OptionalTaxDescription} {Optional Tax (\OptionalTaxRate\%)}
 
 \providecommand{\FootNote}               {}
-\providecommand{\FootNoteExtra}          {}
+\providecommand{\FootNoteTreshold}       {}
 
 % Calculated values
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
@@ -74,10 +75,14 @@
 \rfoot{}
 
 \ifthenelse{\equal{\FootNote}{}}{}{
-  \lfoot{\small\FootNote 
-    \ifthenelse{\equal{\FootNoteExtra}{}}{\\}{
-      \FootNoteExtra
-    }
+  \lfoot{\small\FootNote
+    \ifthenelse{\equal{\FootNoteTreshold}{}}
+      {}
+      {\FPeval{\tresh}{round(\CalculatedTotal * 100 - \Treshold * 100, 0)}
+      \ifthenelse{\tresh>0}
+        {\FootNoteTreshold}
+        {}
+      }
   }
 }
 
