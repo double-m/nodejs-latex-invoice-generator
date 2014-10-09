@@ -1,6 +1,12 @@
+\def \MyName                             {John Doe}
+\def \MyAdress                           {Nowhere Blvd}
+\def \MyCity                             {Anytown, Thatworld}
+\def \MyVat                              {0987654321}
+\def \MyContacts                         {johndoe.com}
+
 \def \ClientName                         {My Favorite Company}
 \def \ClientAddress                      {22 Acacia Ave}
-\def \ClientCity                         {Somewhere in the World}
+\def \ClientCity                         {Somecity, Thisworld}
 \def \ClientVat                          {1234567890}
 
 \def \InvoiceNumberValue                 {1}

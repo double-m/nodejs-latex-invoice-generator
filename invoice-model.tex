@@ -9,13 +9,19 @@
 \usepackage[nomessages]{fp}
 \usepackage{ifthen}
 \usepackage{ragged2e}
+\usepackage[]{geometry}
 
 \input{./locales/italian.def}
 \input{./values.def}
 
+% Visual settings
 \pagestyle{fancy}
+\newgeometry{textwidth=400pt,marginparwidth=86pt,voffset=20pt}
+\def \Spacer                             {10mm}
+\linespread{1.5}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.2pt}
 
-\author{Name Surname}
 
 % Default english expressions
 \providecommand{\ClientHeading}          {Billed to}
@@ -26,9 +32,13 @@
 \providecommand{\HeadAmount}             {Amount}
 \providecommand{\FootTotal}              {Total}
 
-\vspace{10 mm}
-
 % Default values
+\providecommand{\MyName}                 {NAME SURNAME}
+\providecommand{\MyAdress}               {ADDRESS}
+\providecommand{\MyCity}                 {CITY, STATE}
+\providecommand{\MyVat}                  {VAT\_CODE}
+\providecommand{\MyContacts}             {MYSITE.COM}
+
 \providecommand{\ClientName}             {COMPANY NAME}
 \providecommand{\ClientAddress}          {ADDRESS}
 \providecommand{\ClientCity}             {CITY, STATE}
@@ -43,8 +53,8 @@
 \providecommand{\OptionalTaxDescription} {OPTIONAL TAX}
 \providecommand{\OptionalTaxRate}        {10}
 
-\providecommand{\FootNote}               {}
-\providecommand{\FootNoteTreshold}       {}
+\providecommand{\Note}                   {}
+\providecommand{\NoteTreshold}           {}
 
 % Calculated values
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
@@ -53,33 +63,21 @@
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
 \FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
 
-% Compose the header
+% Compose the header and the footer
 \makeatletter
 
 \lhead{}
-\chead{\scshape\large \@author}
+\chead{\scshape\large \MyName}
 \rhead{}
 
 \lfoot{}
-\cfoot{}
+\cfoot{\scshape\footnotesize \ \\ \MyName, \MyAdress $-$ \MyCity, \VatName: \MyVat $-$ \MyContacts}
 \rfoot{}
-
-\ifthenelse{\equal{\FootNote}{}}{}{
-  \lfoot{\small\FootNote
-    \ifthenelse{\equal{\FootNoteTreshold}{}}
-      {}
-      {\FPeval{\tresh}{round(\CalculatedTotal * 100 - \Treshold * 100, 0)}
-      \ifthenelse{\tresh>0}
-        {\FootNoteTreshold}
-        {}
-      }
-  }
-}
-
-\linespread{1.5}
 
 % Compose the body
 \begin{document}
+
+\ \vspace{\Spacer}
 
 \begin{minipage}[t]{\textwidth}
   \begin{verse}
@@ -97,7 +95,7 @@
   \end{verse}
 \end{minipage}
 
-\vspace{10 mm}
+\vspace{\Spacer}
 
 \begin{minipage}[t]{\textwidth}
   \begin{flushleft}
@@ -109,7 +107,7 @@
   \end{flushleft}
 \end{minipage}
 
-\vspace{10 mm}
+\vspace{\Spacer}
 
 \noindent
 \begin{tabular*}{\textwidth}{p{9cm} @{\extracolsep{\fill}} r}
@@ -135,8 +133,24 @@
   \textbf{\FootTotal} & \textbf{\CalculatedTotal \texteuro}
 \end{tabular*}
 
+\vspace{\Spacer}
+
+\ifthenelse{\equal{\Note}{}}{}{
+  {\setlength{\baselineskip}{0.7\baselineskip}
+    \noindent
+    \Note
+    \ifthenelse{\equal{\NoteTreshold}{}}
+      {}
+      {\FPeval{\tresh}{round(\CalculatedTotal * 100 - \Treshold * 100, 0)}
+      \ifthenelse{\tresh>0}
+        {\NoteTreshold}
+        {}
+      }
+  \par}
+}
+
 % TODO line for the signature
-%\vspace{10 mm}
+%\vspace{\Spacer}
 
 \end{document}
 
