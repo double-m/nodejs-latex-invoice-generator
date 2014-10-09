@@ -1,30 +1,40 @@
 \documentclass[a4paper]{report}
 
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
 \usepackage{invoice}
 \usepackage{/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr}
+\usepackage{lmodern,textcomp}
+\usepackage{eurosym}
+%\usepackage{setspace}
 
 \pagestyle{fancy}
 
 \author{Name Surname}
 
-\def \clientHeading        {Billed to}
-\def \clientName           {My Favorite Company}
-\def \clientAddress        {22 Acacia Ave}
-\def \clientCity           {Somewhere}
-\def \clientVat            {VAT: 1234567890}
+\def \clientHeading          {Billed to}
+\def \clientName             {My Favorite Company}
+\def \clientAddress          {22 Acacia Ave}
+\def \clientCity             {Somewhere}
+\def \clientVat              {VAT: 1234567890}
 
-\def \invoiceNumber        {Invoice n$^{\circ}$ 1}
-\def \invoiceDate          {\today}
+\def \invoiceNumber          {Invoice n$^{\circ}$ 1}
+\def \invoiceDate            {\today}
 
-\def \projectName          {Project Name}
-\def \currency             {Euro}
-%\def \VAT                  {Contributo INPS}
-\def \vat                  {23}
-%\def \vat                  {4}
+\def \projectName            {Project Name}
+\def \currency               {Euro}
+\def \OptionalTaxRate        {4}
+%\def \OptionalTaxDescription {Contributo INPS (\OptionalTaxRate\%)}
+\def \OptionalTaxDescription {Optional Tax (\OptionalTaxRate\%)}
+\def \OptionalTaxAmount      {400.00}
 
-\def \activityDescription  {Activity Description}
-\def \activityFee          {10000.00}
-\def \activityCount        {1}
+\def \ActivityDescription    {Activity Description Activity Description Activity Description Activity Description Activity Description Activity Description Activity Description }
+\providecommand{\ActivityPeriod}{\today - \today}
+\def \ActivityFee            {10000.00}
+
+\def \Period                 {Period}
+
+\def \CalculatedTotal        {10400.00}
 
 \makeatletter
 
@@ -44,7 +54,7 @@
   \begin{verse}
     \begin{flushright}
       \begin{tabular}{rl}
-        \clientHeading & \clientName
+        \clientHeading & \textbf{\clientName}
         \\
         & \clientAddress
         \\
@@ -56,6 +66,8 @@
   \end{verse}
 \end{minipage}
 
+\vspace{10 mm}
+
 \begin{minipage}[t]{\textwidth}
   \begin{flushleft}
     \begin{tabular}{r}
@@ -66,12 +78,23 @@
   \end{flushleft}
 \end{minipage}
 
-\begin{invoice}{\currency}{\vat}
-\ProjectTitle{\projectName}
+\vspace{10 mm}
 
-  \Fee{\activityDescription}{\activityFee}{\activityCount}
-\end{invoice}
-
+\begin{tabular*}{\textwidth}{p{9cm} @{\extracolsep{\fill}} r}
+  \textbf{\Activity} & \textbf{\Amount} \\
+  \hline
+  & \\
+  {\setlength{\baselineskip}{0.7\baselineskip}
+  \ActivityDescription \par
+  }
+  & \ActivityFee\ \texteuro \\
+  {\setlength{\baselineskip}{0.7\baselineskip}
+  \OptionalTaxDescription \par
+  }
+  & \OptionalTaxAmount\ \texteuro \\
+  \hline
+  \textbf{\Total} & \textbf{\CalculatedTotal\ \texteuro}
+\end{tabular*}
 
 \end{document}
 
