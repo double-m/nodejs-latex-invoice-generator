@@ -5,7 +5,6 @@
 \usepackage{/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr}
 \usepackage{lmodern,textcomp}
 \usepackage{eurosym}
-\usepackage{blindtext}
 \usepackage[nomessages]{fp}
 \usepackage{ifthen}
 \usepackage{ragged2e}
@@ -27,6 +26,7 @@
 \providecommand{\ClientHeading}          {Billed to}
 \providecommand{\InvoiceNumberText}      {Invoice no.}
 \providecommand{\VatName}                {VAT}
+\providecommand{\TaxCodeName}            {SSN}
 
 \providecommand{\HeadActivity}           {Activity}
 \providecommand{\HeadAmount}             {Amount}
@@ -34,8 +34,10 @@
 
 % Default values
 \providecommand{\MyName}                 {NAME SURNAME}
+\providecommand{\MySlogan}               {MY SLOGAN}
 \providecommand{\MyAdress}               {ADDRESS}
 \providecommand{\MyCity}                 {CITY, STATE}
+\providecommand{\MyTaxCode}              {}
 \providecommand{\MyVat}                  {VAT\_CODE}
 \providecommand{\MyContacts}             {MYSITE.COM}
 
@@ -47,7 +49,12 @@
 \providecommand{\InvoiceNumberValue}     {0}
 \providecommand{\InvoiceDate}            {\today}
 
-\providecommand{\ActivityDescription}    {\blindtext}
+\providecommand{\ActivityDescription}    {Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+  Etiam lobortis facilisis sem. Nullam nec mi et neque phare-
+  tra sollicitudin. Praesent imperdiet mi nec ante. Donec
+  ullamcorper, felis non sodales commodo, lectus velit ultri-
+  ces augue, a dignissim nibh lectus placerat pede. Vivamus
+  nunc nunc, molestie ut, ultricies vel, semper in, velit.}
 \providecommand{\ActivityFee}            {0.00}
 
 \providecommand{\OptionalTaxDescription} {OPTIONAL TAX}
@@ -60,8 +67,9 @@
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
 \def \InvoiceNumberOut                   {\InvoiceNumberText\ \InvoiceNumberValue}
 \def \OptionalTaxDescOut                 {\OptionalTaxDescription\ (\OptionalTaxRate\%)}
-\def \VatOut                             {\VatName: \MyVat}
-\def \TaxCodeOut                         {}
+\def \MyVatOut                           {\VatName: \MyVat}
+\def \MyTaxCodeOut                       {\ifthenelse{\equal{\MyTaxCode}{}}{}
+                                           {\TaxCodeName: \MyTaxCode\ $-$\ }}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
 \FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
 
@@ -75,7 +83,7 @@
       {\scshape\LARGE \MyName}
       \vspace{1mm}
       \\
-      {\ttfamily\large > Software Development and Operations}
+      {\ttfamily\large \MySlogan}
     \end{tabular}
   }
 }
@@ -83,7 +91,7 @@
 \rhead{}
 
 \lfoot{}
-\cfoot{\scshape\small \ \\ \MyName, \MyAdress\ $-$ \MyCity \\ \TaxCodeOut\VatOut \\ \MyContacts}
+\cfoot{\scshape\small \ \\ \MyName, \MyAdress\ $-$ \MyCity \\ \MyTaxCodeOut \MyVatOut \\ \MyContacts}
 \rfoot{}
 
 % Compose the body

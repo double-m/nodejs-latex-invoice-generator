@@ -1,3 +1,6 @@
+\def \VatName                            {P. Iva}
+\def \TaxCodeName                        {CF}
+
 \def \ClientHeading                      {Spettabile}
 \def \InvoiceNumberText                  {Fattura n$^{\circ}$}
 

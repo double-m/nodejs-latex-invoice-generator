@@ -1,7 +1,9 @@
 \def \MyName                             {John Doe}
+\def \MySlogan                           {Best Professionist Ever}
 \def \MyAdress                           {Nowhere Blvd}
 \def \MyCity                             {Anytown, Thatworld}
 \def \MyVat                              {0987654321}
+\def \MyTaxCode                          {ABCDEFGHIJ} % optional
 \def \MyContacts                         {johndoe.com}
 
 \def \ClientName                         {My Favorite Company}
