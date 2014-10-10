@@ -10,18 +10,18 @@
 \usepackage{ifthen}
 \usepackage{ragged2e}
 \usepackage[]{geometry}
+\usepackage{wallpaper}
 
 \input{./locales/italian.def}
 \input{./values.def}
 
 % Visual settings
 \pagestyle{fancy}
-\newgeometry{textwidth=400pt,marginparwidth=86pt,voffset=20pt}
+\newgeometry{textwidth=400pt,marginparwidth=86pt}
 \def \Spacer                             {10mm}
 \linespread{1.5}
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0.2pt}
 \renewcommand{\footrulewidth}{0.2pt}
-
 
 % Default english expressions
 \providecommand{\ClientHeading}          {Billed to}
@@ -60,18 +60,30 @@
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
 \def \InvoiceNumberOut                   {\InvoiceNumberText\ \InvoiceNumberValue}
 \def \OptionalTaxDescOut                 {\OptionalTaxDescription\ (\OptionalTaxRate\%)}
+\def \VatOut                             {\VatName: \MyVat}
+\def \TaxCodeOut                         {}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
 \FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
 
 % Compose the header and the footer
 \makeatletter
 
-\lhead{}
-\chead{\scshape\large \MyName}
+\lhead{
+  \IfFileExists{graphics/logo100x100.png}{\includegraphics[]{graphics/logo100x100.png}}{}
+  \raisebox{3.2ex}{
+    \begin{tabular}{l}
+      {\scshape\LARGE \MyName}
+      \vspace{1mm}
+      \\
+      {\ttfamily\large > Software Development and Operations}
+    \end{tabular}
+  }
+}
+\chead{}
 \rhead{}
 
 \lfoot{}
-\cfoot{\scshape\footnotesize \ \\ \MyName, \MyAdress $-$ \MyCity, \VatName: \MyVat $-$ \MyContacts}
+\cfoot{\scshape\small \ \\ \MyName, \MyAdress\ $-$ \MyCity \\ \TaxCodeOut\VatOut \\ \MyContacts}
 \rfoot{}
 
 % Compose the body
@@ -149,8 +161,12 @@
   \par}
 }
 
-% TODO line for the signature
-%\vspace{\Spacer}
+\vspace{\Spacer}
+\vspace{\Spacer}
+
+\begin{flushright}
+  \rule{0.5\textwidth}{1pt}
+\end{flushright}
 
 \end{document}
 
