@@ -1,7 +1,6 @@
 \documentclass[a4paper]{report}
 
 \usepackage[utf8]{inputenc}
-\usepackage[italian]{babel}
 \usepackage{/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr}
 \usepackage{lmodern,textcomp}
 \usepackage{eurosym}
@@ -39,6 +38,7 @@
 \providecommand{\MyCity}                 {CITY, STATE}
 \providecommand{\MyTaxCode}              {}
 \providecommand{\MyVat}                  {VAT\_CODE}
+\providecommand{\MyBankCode}             {BANK\_CODE}
 \providecommand{\MyContacts}             {MYSITE.COM}
 
 \providecommand{\ClientName}             {COMPANY NAME}
@@ -68,6 +68,7 @@
 \def \InvoiceNumberOut                   {\InvoiceNumberText\ \InvoiceNumberValue}
 \def \OptionalTaxDescOut                 {\OptionalTaxDescription\ (\OptionalTaxRate\%)}
 \def \MyVatOut                           {\VatName: \MyVat}
+\def \MyBankCodeOut                      {\BankCodeName: \MyBankCode}
 \def \MyTaxCodeOut                       {\ifthenelse{\equal{\MyTaxCode}{}}{}
                                            {\TaxCodeName: \MyTaxCode\ $-$\ }}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
@@ -91,7 +92,7 @@
 \rhead{}
 
 \lfoot{}
-\cfoot{\scshape\small \ \\ \MyName, \MyAdress\ $-$ \MyCity \\ \MyTaxCodeOut \MyVatOut \\ \MyContacts}
+\cfoot{\scshape\small \ \\ \MyName, \MyAdress\ $-$ \MyCity \\ \MyTaxCodeOut \MyVatOut\ $-$ \MyBankCodeOut\\ \MyContacts}
 \rfoot{}
 
 % Compose the body
@@ -168,13 +169,6 @@
       }
   \par}
 }
-
-\vspace{\Spacer}
-\vspace{\Spacer}
-
-\begin{flushright}
-  \rule{0.5\textwidth}{1pt}
-\end{flushright}
 
 \end{document}
 

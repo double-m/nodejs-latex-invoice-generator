@@ -1,4 +1,9 @@
-\def \VatName                            {P. Iva}
+\usepackage[english,italian]{babel}
+\lefthyphenmin=30
+\righthyphenmin=30
+
+\def \VatName                            {P. IVA}
+\def \BankCodeName                       {IBAN}
 \def \TaxCodeName                        {CF}
 
 \def \ClientHeading                      {Spettabile}

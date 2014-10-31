@@ -4,7 +4,8 @@
 \def \MyCity                             {Anytown, Thatworld}
 \def \MyVat                              {0987654321}
 \def \MyTaxCode                          {ABCDEFGHIJ} % optional
-\def \MyContacts                         {johndoe.com}
+\def \MyBankCode                         {XY012345678901234567890123}
+\def \MyContacts                         {johndoe.example.com}
 
 \def \ClientName                         {My Favorite Company}
 \def \ClientAddress                      {22 Acacia Ave}
@@ -14,7 +15,7 @@
 \def \InvoiceNumberValue                 {1}
 \def \InvoiceDate                        {October 09, 2014}
 
-\def \ActivityDescription                {Got a cat down from a very very high tree}
+\def \ActivityDescription                {Got a cat down from a very high tree}
 \def \ActivityFee                        {10000.00}
 
 %To make the optional tax disappear from the invoice, put this value to 0
