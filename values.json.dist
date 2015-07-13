@@ -1,0 +1,23 @@
+{
+  "MyName": "John Doe",
+  "MySlogan": "Best Professionist Ever",
+  "MyAdress": "Nowhere Blvd",
+  "MyCity": "Anytown, Thatworld",
+  "MyVat": "0987654321",
+  "MyTaxCode": "ABCDEFGHIJ",
+  "MyBankCode": "XY012345678901234567890123",
+  "MyContacts": "johndoe.example.com",
+
+  "ClientName": "My Favorite Company",
+  "ClientAddress": "22 Acacia Ave",
+  "ClientCity": "Somecity, Thisworld",
+  "ClientVat": "1234567890",
+
+  "InvoiceNumberValue": 1,
+  "InvoiceData": "2015-07-13",
+
+  "ActivityDescription": "Got a cat down from a very high tree",
+  "ActivityFee": 10000.00,
+
+  "OptionalTaxRate": 0
+}

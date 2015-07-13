@@ -19,3 +19,4 @@ The following commands must be globally available: `pdflatex`, `node`, `npm`.
 - JS static object -> `invoice.pdf`
 - `values.json` -> JS static object -> `invoice.pdf`
 - new tree structure to be used to store the invoices
+- automatic invoice number

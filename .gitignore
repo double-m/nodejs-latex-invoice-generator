@@ -3,3 +3,4 @@ npm-debug.log
 values.def
 
 node_modules/
+.coverage/
