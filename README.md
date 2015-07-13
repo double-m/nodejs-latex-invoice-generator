@@ -15,7 +15,7 @@ The following commands must be globally available: `pdflatex`, `node`, `npm`.
 
 ## TODO
 
-- new tree structure to be used to store the invoices
 - `tmp-static-info.def` -> `invoice.pdf` (no calculations via LaTeX)
 - JS static object -> `invoice.pdf`
 - `values.json` -> JS static object -> `invoice.pdf`
+- new tree structure to be used to store the invoices
