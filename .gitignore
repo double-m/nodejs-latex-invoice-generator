@@ -1,9 +1,5 @@
-invoice-model.aux
-invoice-model.log
-invoice-model.pdf
-invoice-model.dvi
-invoice-model.out
-
+invoice-model.*
+npm-debug.log
 values.def
 
-graphics/*
+node_modules/

@@ -1,17 +1,21 @@
-invoice-latex-model
-===================
+# nodejs-latex-invoice-generator
 
 Generate invoices editing `values.def` and executing
 
 ```
-user@linuxbox:~$ pdflatex invoice-model.tex
+$ npm install
+$ node lib/index.js values.def
 ```
 
-To add a logo, create a directory called `graphics` and put the logo there with the following name:
+Note: this model is customized upon the italian *regime dei minimi*, year 2015.
 
-```
-user@linuxbox:~$ ls -1 graphics/
-logo100x100.png
-```
+## Prerequisites
 
-Note: this model is customized upon the italian *regime dei minimi*, year 2014.
+The following commands must be globally available: `pdflatex`, `node`, `npm`.
+
+## TODO
+
+- new tree structure to be used to store the invoices
+- `tmp-static-info.def` -> `invoice.pdf` (no calculations via LaTeX)
+- JS static object -> `invoice.pdf`
+- `values.json` -> JS static object -> `invoice.pdf`
