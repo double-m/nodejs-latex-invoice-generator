@@ -1,5 +1,6 @@
 var expect = require('chai').expect
-  , jsontotex = require('../lib/jsontotex');
+  , rewire = require("rewire")
+  , jsontotex = rewire('../lib/jsontotex');
 
 describe('Test the code generation', function() {
 
@@ -17,13 +18,23 @@ describe('Test the code generation', function() {
       expect(jsontotex.formatPair(obj.line3)).to.equal('\\def \\myVar {' + obj.line3.myVar + '}');
     });
 
-    it('date from YYYY-MM-DD to IT locale (EN is the default)', function() {
+    it('should get the locale for the date/time', function() {
+      expect(/[a-z][a-z]_[A-Z][A-Z]/.test(jsontotex.getLocaleTime())).to.be.true;
+    });
+
+    it('should format an ISO date to a locale-based fancy format (it_IT supported, en_EN is the default)', function() {
+      var revertStub = jsontotex.__set__('getLocaleTime', function() { return 'en_EN'; });
+      expect(jsontotex.formatVal('InvoiceIsoDate', '2015-07-01')).to.equal('Wednesday, July 01, 2015');
+
+      jsontotex.__set__('getLocaleTime', function() { return 'it_IT'; });
       expect(jsontotex.formatVal('InvoiceIsoDate', '2015-07-01')).to.equal('Mercoledì 01 luglio 2015');
-      //expect(jsontotex.formatVal('InvoiceIsoDate', '2015-07-01')).to.equal('Wednesday, July 01, 2015');
+      
+      revertStub();
     });
 
     it.skip('parse JSON file');
 
+    //jsontotex.getLocaleTime.restore();
   });
 
 });
