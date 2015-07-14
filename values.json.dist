@@ -14,7 +14,7 @@
   "ClientVat": "1234567890",
 
   "InvoiceNumberValue": 1,
-  "InvoiceData": "2015-07-13",
+  "InvoiceIsoDate": "2015-07-13",
 
   "ActivityDescription": "Got a cat down from a very high tree",
   "ActivityFee": 10000.00,

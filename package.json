@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/double-m/nodejs-latex-invoice-generator#readme",
   "dependencies": {
-    "shelljs": "^0.5.1"
+    "shelljs": "^0.5.1",
+    "strftime": "^0.9.2"
   },
   "devDependencies": {
     "chai": "^2.1.2",

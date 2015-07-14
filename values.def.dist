@@ -13,7 +13,7 @@
 \def \ClientVat                          {1234567890}
 
 \def \InvoiceNumberValue                 {1}
-\def \InvoiceDate                        {October 09, 2014}
+\def \InvoiceIsoDate                     {October 09, 2014}
 
 \def \ActivityDescription                {Got a cat down from a very high tree}
 \def \ActivityFee                        {10000.00}
