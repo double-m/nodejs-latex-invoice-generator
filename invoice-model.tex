@@ -9,6 +9,9 @@
 \usepackage{ragged2e}
 \usepackage[]{geometry}
 \usepackage{wallpaper}
+\usepackage{color}
+
+\newcommand\customfont[1]{{\usefont{T1}{custom}{m}{n} #1 }}
 
 \input{./locales/italian.def}
 \input{./values.def}
@@ -26,6 +29,7 @@
 \providecommand{\InvoiceNumberText}      {Invoice no.}
 \providecommand{\VatName}                {VAT}
 \providecommand{\TaxCodeName}            {SSN}
+\providecommand{\ContactsName}           {Contacts}
 
 \providecommand{\HeadActivity}           {Activity}
 \providecommand{\HeadAmount}             {Amount}
@@ -71,14 +75,19 @@
 \def \MyBankCodeOut                      {\BankCodeName: \MyBankCode}
 \def \MyTaxCodeOut                       {\ifthenelse{\equal{\MyTaxCode}{}}{}
                                            {\TaxCodeName: \MyTaxCode\ $-$\ }}
+\def \MyContactsOut                      {\ContactsName: \underline{\MyContacts}}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
 \FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
+
+\color[rgb]{0.5,0.5,0.5}
 
 % Compose the header and the footer
 \makeatletter
 
+\renewcommand{\headrulewidth}{0pt}
+
 \lhead{
-  \IfFileExists{graphics/logo100x100.png}{\includegraphics[]{graphics/logo100x100.png}}{}
+  \IfFileExists{graphics/banner.png}{\includegraphics[width=\textwidth]{graphics/banner.png}}{
   \raisebox{3.2ex}{
     \begin{tabular}{l}
       {\scshape\LARGE \MyName}
@@ -87,17 +96,20 @@
       {\ttfamily\large \MySlogan}
     \end{tabular}
   }
-}
+}}
 \chead{}
 \rhead{}
 
 \lfoot{}
-\cfoot{\scshape\small \ \\ \MyName, \MyAdress\ $-$ \MyCity \\ \MyTaxCodeOut \MyVatOut\ $-$ \MyBankCodeOut\\ \MyContacts}
+\cfoot{\customfont{\ \\ {\MyName, \MyAdress\ $-$ \MyCity \\ \MyTaxCodeOut \MyVatOut\ $-$ \MyBankCodeOut\\ \MyContactsOut}}}
 \rfoot{}
 
 % Compose the body
 \begin{document}
 
+\color[rgb]{0,0,0}
+
+\ \vspace{\Spacer}
 \ \vspace{\Spacer}
 
 \begin{minipage}[t]{\textwidth}
@@ -118,15 +130,15 @@
 
 \vspace{\Spacer}
 
-\begin{minipage}[t]{\textwidth}
+%\begin{minipage}[t]{\textwidth}
   \begin{flushleft}
-    \begin{tabular}{r}
+    \begin{tabular}{l}
       \InvoiceNumberOut
       \\
       \InvoiceDate
     \end{tabular}
   \end{flushleft}
-\end{minipage}
+%\end{minipage}
 
 \vspace{\Spacer}
 
@@ -169,6 +181,10 @@
       }
   \par}
 }
+
+%\color[rgb]{0,0,0}
+
+%\color[rgb]{0.5,0.5,0.5}
 
 \end{document}
 

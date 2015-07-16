@@ -5,6 +5,7 @@
 \def \VatName                            {P. IVA}
 \def \BankCodeName                       {IBAN}
 \def \TaxCodeName                        {CF}
+\def \ContactsName                       {Contatti}
 
 \def \ClientHeading                      {Spettabile}
 \def \InvoiceNumberText                  {Fattura n$^{\circ}$}

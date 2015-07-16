@@ -3,7 +3,8 @@ invoice-model.log
 invoice-model.pdf
 invoice-model.dvi
 invoice-model.out
-
+missfont.log
 values.def
+*.swp
 
 graphics/*
