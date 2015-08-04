@@ -17,6 +17,9 @@
 \def \OptionalTaxRate                    {4}
 \def \OptionalTaxDescription             {Contributo INPS}
 
+\def \OptionalDiscount                   {0}
+\def \OptionalDiscountDescription        {Sconto}
+
 \def \Note                               {Operazione effettuata ai sensi dell'articolo
 	27 commi 1 e 2 D.L. 98/2011. Prestazione non soggetta a ritenuta
 	d'acconto ai sensi del comma 5.2 del Provvedimento Agenzia delle

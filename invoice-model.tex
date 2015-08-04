@@ -19,7 +19,7 @@
 % Visual settings
 \pagestyle{fancy}
 \newgeometry{textwidth=400pt,marginparwidth=86pt}
-\def \Spacer                             {10mm}
+\def \Spacer                             {7mm}
 \linespread{1.5}
 \renewcommand{\headrulewidth}{0.2pt}
 \renewcommand{\footrulewidth}{0.2pt}
@@ -64,6 +64,9 @@
 \providecommand{\OptionalTaxDescription} {OPTIONAL TAX}
 \providecommand{\OptionalTaxRate}        {10}
 
+\providecommand{\OptionalDiscountDescription} {OPTIONAL DISCOUNT}
+\providecommand{\OptionalDiscount}            {15}
+
 \providecommand{\Note}                   {}
 \providecommand{\NoteTreshold}           {}
 
@@ -71,13 +74,15 @@
 \def \ClientVatOut                       {\VatName:\ \ClientVat}
 \def \InvoiceNumberOut                   {\InvoiceNumberText\ \InvoiceNumberValue}
 \def \OptionalTaxDescOut                 {\OptionalTaxDescription\ (\OptionalTaxRate\%)}
+\def \OptionalDiscountDescOut            {\OptionalDiscountDescription}
 \def \MyVatOut                           {\VatName: \MyVat}
 \def \MyBankCodeOut                      {\BankCodeName: \MyBankCode}
 \def \MyTaxCodeOut                       {\ifthenelse{\equal{\MyTaxCode}{}}{}
                                            {\TaxCodeName: \MyTaxCode\ $-$\ }}
 \def \MyContactsOut                      {\ContactsName: \underline{\MyContacts}}
 \FPeval{\OptionalTaxAmount}              {round(\ActivityFee * \OptionalTaxRate / 100, 2)}
-\FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount, 2)}
+\FPeval{\OptionalDiscountAmount}         {round(\OptionalDiscount, 2)}
+\FPeval{\CalculatedTotal}                {round(\ActivityFee + \OptionalTaxAmount - \OptionalDiscountAmount, 2)}
 
 \color[rgb]{0.5,0.5,0.5}
 
@@ -151,14 +156,21 @@
   {\setlength{\baselineskip}{0.7\baselineskip}
     \ActivityDescription \par
   }
-  & \ActivityFee \texteuro
+  & \ActivityFee \texteuro \\
 
   \ifthenelse{\equal{\OptionalTaxRate}{0}}{\\}{
-    \\
     {\setlength{\baselineskip}{0.7\baselineskip}
       \OptionalTaxDescOut \par
     }
     & \OptionalTaxAmount \texteuro
+    \\
+  }
+
+  \ifthenelse{\equal{\OptionalDiscountAmount}{0}}{\\}{
+    {\setlength{\baselineskip}{0.7\baselineskip}
+      \OptionalDiscountDescOut \par
+    }
+    & -\OptionalDiscountAmount \texteuro
     \\
   }
 
